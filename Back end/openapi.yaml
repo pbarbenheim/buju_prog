@@ -1,0 +1,455 @@
+openapi: 3.0.3
+info:
+  title: BuJu API
+  version: 0.1.0
+paths:
+  /schueler:
+    post:
+      operationId: createSchueler
+      tags: [schueler]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/schuelerCreatePayload"
+      responses: 
+        201:
+          description: Created.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/schueler"
+        400:
+          description: Bad Request.
+        5XX:
+          description: Error.
+    get:
+      operationId: getSchuelers
+      tags: [schueler]
+      responses:
+        200:
+          description: OK.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/schuelers"
+        404:
+          description: Not Found.
+  /schueler/{id}:
+    parameters:
+      - in: path
+        name: id
+        required: true
+        schema:
+          type: integer
+    get:
+      operationId: getSchueler
+      tags: [schueler]
+      responses:
+        200:
+          description: OK.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/schueler"
+        404:
+          description: Not Found.
+    put:
+      operationId: updateSchueler
+      tags: [schueler]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/schuelerUpdatePayload"
+      responses:
+        200:
+          description: OK.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/schueler"
+        400:
+          description: Bad Request.
+        404:
+          description: Not Found.
+        5XX:
+          description: Error.
+    delete:
+      operationId: deleteSchueler
+      tags: [schueler]
+      responses:
+        200:
+          description: OK.
+        404:
+          description: Not Found.
+        5XX:
+          description: Error.
+  /riegen:
+    post:
+      operationId: createRiege
+      tags: [riege]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/riegePayload"
+      responses: 
+        201:
+          description: Created.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/riege"
+    get:
+      operationId: getRiegen
+      tags: [riege]
+      responses:
+        200:
+          description: OK.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/riegeArray"
+  /riegen/{id}:
+    parameters:
+      - in: path
+        name: id
+        required: true
+        schema:
+          type: integer
+    get:
+      operationId: getRiege
+      tags: [riege]
+      responses:
+        200:
+          description: OK.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/riege"
+    put:
+      operationId: updateRiege
+      tags: [riege]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/riegePayload"
+      responses:
+        200:
+          description: OK.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/riege"
+    delete:
+      operationId: deleteRiege
+      tags: [riege]
+      responses:
+        200:
+          description: OK.
+  /ergebnisse:
+    post:
+      operationId: createErgebnis
+      tags: [ergebnis]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ergebnisCreatePayload"
+      responses: 
+        201:
+          description: Created.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ergebnis"
+    get:
+      operationId: getErgebnisse
+      tags: [ergebnis]
+      responses:
+        200:
+          description: OK.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ergebnisArray"
+  /ergebnisse/{id}:
+    parameters:
+      - in: path
+        name: id
+        required: true
+        schema:
+          type: integer
+    get:
+      operationId: getErgebnis
+      tags: [ergebnis]
+      responses:
+        200:
+          description: OK.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ergebnis"
+    put:
+      operationId: updateErgebnis
+      tags: [ergebnis]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ergebnisUpdatePayload"
+      responses:
+        200:
+          description: OK.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ergebnis"
+    delete:
+      operationId: deleteErgebnis
+      tags: [ergebnis]
+      responses:
+        200:
+          description: OK.
+        404:
+          description: Not Found.
+  /disziplinen:
+    get:
+      operationId: getDisziplinen
+      tags: [disziplin]
+      responses:
+        200:
+          description: OK.
+          content:
+            application/json:
+              schema: 
+                $ref: "#/components/schemas/disziplinArray"
+  /disziplinen/{id}:
+    parameters:
+      - in: path
+        name: id
+        required: true
+        schema:
+          type: integer
+    get:
+      operationId: getDisziplin
+      tags: [disziplin]
+      responses:
+        200:
+          description: OK.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/disziplin"
+components:
+  schemas:
+    schueler:
+      type: object
+      properties:
+        id:
+          type: string
+        vorname:
+          type: string
+        nachname:
+          type: string
+        geburtsjahr:
+          type: number
+          format: integer
+        unterscheider:
+          type: string
+        geschlecht:
+          type: string
+          enum:
+            - maennlich
+            - weiblich
+            - divers
+        anwesenheit:
+          type: boolean
+          default: true
+        riegen_id:
+          type: string
+      required:
+        - id
+        - vorname
+        - nachname
+    schuelers:
+      type: object
+      properties:
+        schuelers:
+          type: array
+          items:
+            $ref: "#/components/schemas/schueler"
+      required:
+        - schuelers
+    schuelerCreatePayload:
+      type: object
+      properties:
+        vorname:
+          type: string
+        nachname:
+          type: string
+        geburtsjahr:
+          type: number
+          format: integer
+        unterscheider:
+          type: string
+        geschlecht:
+          type: string
+          enum:
+            - maennlich
+            - weiblich
+            - divers
+        anwesenheit:
+          type: boolean
+          default: true
+        riegen_id:
+          type: string
+      required:
+        - vorname
+        - nachname
+    schuelerUpdatePayload:
+      type: object
+      properties:
+        vorname:
+          type: string
+        nachname:
+          type: string
+        geburtsjahr:
+          type: number
+          format: integer
+        unterscheider:
+          type: string
+        geschlecht:
+          type: string
+          enum:
+            - maennlich
+            - weiblich
+            - divers
+        anwesenheit:
+          type: boolean
+          default: true
+        riegen_id:
+          type: string
+          
+    riege:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+      required:
+        - id
+        - name
+    riegeArray:
+      type: object
+      properties:
+        riegen:
+          type: array
+          items:
+            $ref: "#/components/schemas/riege"
+    riegePayload:
+      type: object
+      properties:
+        name: 
+          type: string
+    
+    disziplin:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        a:
+          type: number
+          format: float
+        c:
+          type: number
+          format: float
+        d:
+          type: number
+          format: integer
+        geschlecht:
+          type: string
+          enum:
+            - maennlich
+            - weiblich
+            - divers
+        formel:
+          type: string
+          enum:
+            - lauf
+            - andere
+      required:
+        - id
+        - name
+        - geschlecht
+        - formel
+    disziplinArray:
+      type: object
+      properties:
+        disziplinen:
+          type: array
+          items:
+            $ref: "#/components/schemas/disziplin"
+    
+    ergebnis:
+      type: object
+      properties:
+        id:
+          type: string
+        disziplin_id:
+          type: string
+        schueler_id:
+          type: string
+        wert:
+          type: number
+          format: float
+        punkte:
+          type: number
+          format: integer
+      required: 
+        - id
+        - disziplin_id
+        - schueler_id
+        - wert
+        - punkte
+    ergebnisArray:
+      type: object
+      properties:
+        ergebnisse:
+          type: array
+          items:
+            $ref: "#/components/schemas/ergebnis"
+      required: 
+        - ergebnisse
+    ergebnisCreatePayload:
+      type: object
+      properties:
+        disziplin_id:
+          type: string
+        schueler_id:
+          type: string
+        wert:
+          type: number
+          format: float
+      required: 
+        - disziplin_id
+        - schueler_id
+        - wert
+    ergebnisUpdatePayload:
+      type: object
+      properties:
+        wert:
+          type: number
+          format: float
+      

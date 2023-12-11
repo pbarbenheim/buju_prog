@@ -1,0 +1,394 @@
+openapi: 3.0.3
+info:
+  title: BuJu API
+  version: 0.1.0
+servers:
+- url: /
+paths:
+  /schueler:
+    get:
+      tags:
+      - schueler
+      operationId: get_schuelers
+      responses:
+        "200":
+          description: OK.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/schuelers'
+        "404":
+          description: Not Found.
+      x-openapi-router-controller: swagger_server.controllers.schueler_controller
+    post:
+      tags:
+      - schueler
+      operationId: create_schueler
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/schuelerCreatePayload'
+        required: true
+      responses:
+        "201":
+          description: Created.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/schueler'
+        "400":
+          description: Bad Request.
+        "5XX":
+          description: Error.
+      x-openapi-router-controller: swagger_server.controllers.schueler_controller
+  /schueler/{id}:
+    get:
+      tags:
+      - schueler
+      operationId: get_schueler
+      parameters:
+      - name: id
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+      responses:
+        "200":
+          description: OK.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/schueler'
+        "404":
+          description: Not Found.
+      x-openapi-router-controller: swagger_server.controllers.schueler_controller
+    put:
+      tags:
+      - schueler
+      operationId: update_schueler
+      parameters:
+      - name: id
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/schuelerUpdatePayload'
+        required: true
+      responses:
+        "200":
+          description: OK.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/schueler'
+        "400":
+          description: Bad Request.
+        "404":
+          description: Not Found.
+        "5XX":
+          description: Error.
+      x-openapi-router-controller: swagger_server.controllers.schueler_controller
+    delete:
+      tags:
+      - schueler
+      operationId: delete_schueler
+      parameters:
+      - name: id
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+      responses:
+        "200":
+          description: OK.
+        "404":
+          description: Not Found.
+        "5XX":
+          description: Error.
+      x-openapi-router-controller: swagger_server.controllers.schueler_controller
+  /riegen:
+    get:
+      tags:
+      - riege
+      operationId: get_riegen
+      responses:
+        "200":
+          description: OK.
+      x-openapi-router-controller: swagger_server.controllers.riege_controller
+    post:
+      tags:
+      - riege
+      operationId: create_riege
+      responses:
+        "201":
+          description: Created.
+      x-openapi-router-controller: swagger_server.controllers.riege_controller
+  /riegen/{id}:
+    get:
+      tags:
+      - riege
+      operationId: get_riege
+      parameters:
+      - name: id
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+      responses:
+        "200":
+          description: OK.
+      x-openapi-router-controller: swagger_server.controllers.riege_controller
+    put:
+      tags:
+      - riege
+      operationId: update_riege
+      parameters:
+      - name: id
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+      responses:
+        "200":
+          description: OK.
+      x-openapi-router-controller: swagger_server.controllers.riege_controller
+    delete:
+      tags:
+      - riege
+      operationId: delete_riege
+      parameters:
+      - name: id
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+      responses:
+        "200":
+          description: OK.
+      x-openapi-router-controller: swagger_server.controllers.riege_controller
+  /ergebnisse:
+    get:
+      tags:
+      - ergebnis
+      operationId: get_ergebnisse
+      responses:
+        "200":
+          description: OK.
+      x-openapi-router-controller: swagger_server.controllers.ergebnis_controller
+    post:
+      tags:
+      - ergebnis
+      operationId: create_ergebnis
+      responses:
+        "201":
+          description: Created.
+      x-openapi-router-controller: swagger_server.controllers.ergebnis_controller
+  /ergebnisse/{id}:
+    get:
+      tags:
+      - ergebnis
+      operationId: get_ergebnis
+      parameters:
+      - name: id
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+      responses:
+        "200":
+          description: OK.
+      x-openapi-router-controller: swagger_server.controllers.ergebnis_controller
+    put:
+      tags:
+      - ergebnis
+      operationId: update_ergebnis
+      parameters:
+      - name: id
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+      responses:
+        "200":
+          description: OK.
+      x-openapi-router-controller: swagger_server.controllers.ergebnis_controller
+    delete:
+      tags:
+      - ergebnis
+      operationId: delete_ergebnis
+      parameters:
+      - name: id
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+      responses:
+        "200":
+          description: OK.
+      x-openapi-router-controller: swagger_server.controllers.ergebnis_controller
+  /disziplinen:
+    get:
+      tags:
+      - disziplin
+      operationId: get_disziplinen
+      responses:
+        "200":
+          description: OK.
+      x-openapi-router-controller: swagger_server.controllers.disziplin_controller
+  /disziplinen/{id}:
+    get:
+      tags:
+      - disziplin
+      operationId: get_disziplin
+      parameters:
+      - name: id
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+      responses:
+        "200":
+          description: OK.
+      x-openapi-router-controller: swagger_server.controllers.disziplin_controller
+components:
+  schemas:
+    schueler:
+      required:
+      - id
+      - nachname
+      - vorname
+      type: object
+      properties:
+        id:
+          type: string
+        vorname:
+          type: string
+        nachname:
+          type: string
+        geburtsjahr:
+          type: number
+          format: integer
+        unterscheider:
+          type: string
+        geschlecht:
+          type: string
+          enum:
+          - maennlich
+          - weiblich
+          - divers
+        anwesenheit:
+          type: boolean
+          default: true
+        riegen_id:
+          type: string
+      example:
+        vorname: vorname
+        anwesenheit: true
+        riegen_id: riegen_id
+        nachname: nachname
+        geburtsjahr: 0.80082819046101150206595775671303272247314453125
+        geschlecht: maennlich
+        id: id
+        unterscheider: unterscheider
+    schuelers:
+      required:
+      - schuelers
+      type: object
+      properties:
+        schuelers:
+          type: array
+          items:
+            $ref: '#/components/schemas/schueler'
+      example:
+        schuelers:
+        - vorname: vorname
+          anwesenheit: true
+          riegen_id: riegen_id
+          nachname: nachname
+          geburtsjahr: 0.80082819046101150206595775671303272247314453125
+          geschlecht: maennlich
+          id: id
+          unterscheider: unterscheider
+        - vorname: vorname
+          anwesenheit: true
+          riegen_id: riegen_id
+          nachname: nachname
+          geburtsjahr: 0.80082819046101150206595775671303272247314453125
+          geschlecht: maennlich
+          id: id
+          unterscheider: unterscheider
+    schuelerCreatePayload:
+      required:
+      - nachname
+      - vorname
+      type: object
+      properties:
+        vorname:
+          type: string
+        nachname:
+          type: string
+        geburtsjahr:
+          type: number
+          format: integer
+        unterscheider:
+          type: string
+        geschlecht:
+          type: string
+          enum:
+          - maennlich
+          - weiblich
+          - divers
+        anwesenheit:
+          type: boolean
+          default: true
+        riegen_id:
+          type: string
+    schuelerUpdatePayload:
+      type: object
+      properties:
+        vorname:
+          type: string
+        nachname:
+          type: string
+        geburtsjahr:
+          type: number
+          format: integer
+        unterscheider:
+          type: string
+        geschlecht:
+          type: string
+          enum:
+          - maennlich
+          - weiblich
+          - divers
+        anwesenheit:
+          type: boolean
+          default: true
+        riegen_id:
+          type: string
+
